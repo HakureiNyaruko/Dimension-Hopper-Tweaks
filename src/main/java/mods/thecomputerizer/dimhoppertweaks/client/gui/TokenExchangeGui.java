@@ -89,7 +89,6 @@ public class TokenExchangeGui extends GuiScreen {
     }
 
     @Override public void onGuiClosed() {
-        org.lwjgl.input.Mouse.setGrabbed(true);
         DHTNetwork.sendToServer(new PacketSyncGuiData(this.currentSkill,this.conversionRate));
     }
 
