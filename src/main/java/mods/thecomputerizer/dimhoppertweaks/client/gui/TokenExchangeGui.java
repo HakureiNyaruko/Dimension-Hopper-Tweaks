@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import org.lwjgl.input.Mouse;
 
 import static mods.thecomputerizer.dimhoppertweaks.core.DHTRef.MODID;
 import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.POSITION_COLOR;
@@ -34,6 +35,11 @@ public class TokenExchangeGui extends GuiScreen {
         this.currentSkill = currentSkill;
         this.conversionRate = conversionRate;
         this.scrollables = Collections.synchronizedList(new ArrayList<>());
+    }
+
+    @Override public void initGui() {
+        super.initGui();
+        org.lwjgl.input.Mouse.setGrabbed(false);
     }
 
     @Override public void setWorldAndResolution(Minecraft mc, int width, int height) {
@@ -83,6 +89,7 @@ public class TokenExchangeGui extends GuiScreen {
     }
 
     @Override public void onGuiClosed() {
+        org.lwjgl.input.Mouse.setGrabbed(true);
         DHTNetwork.sendToServer(new PacketSyncGuiData(this.currentSkill,this.conversionRate));
     }
 
