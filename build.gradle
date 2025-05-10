@@ -2,7 +2,6 @@ import static org.gradle.api.file.DuplicatesStrategy.INCLUDE
 
 plugins {
     id 'net.minecraftforge.gradle' version '+'
-    id 'wtf.gofancy.fancygradle' version '+'
     id 'org.spongepowered.mixin' version '+'
 }
 
