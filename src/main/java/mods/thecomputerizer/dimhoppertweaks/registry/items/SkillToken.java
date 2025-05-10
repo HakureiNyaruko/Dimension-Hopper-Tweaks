@@ -59,9 +59,6 @@ public class SkillToken extends EpicItem {
             String skill = tag.getString("skillToDrain");
             int amount = tag.getInteger("drainLevels");
             if(player.isSneaking()) {
-                DHTNetwork.sendToClient(new PacketOpenGui(SKILLS,skill,amount),player);
-                return new ActionResult<>(SUCCESS,stack);
-            } else if(player.experienceLevel>=amount) {
                 ISkillCapability cap = SkillWrapper.getSkillCapability(player);
                 if(Objects.nonNull(cap)) {
                     for(int i=0; i<amount; i++) {
@@ -74,6 +71,9 @@ public class SkillToken extends EpicItem {
                     SkillWrapper.updateTokens(player);
                 }
                 return new ActionResult<>(SUCCESS, stack);
+            } else if(player.experienceLevel>=amount) {
+                DHTNetwork.sendToClient(new PacketOpenGui(SKILLS,skill,amount),player);
+                return new ActionResult<>(SUCCESS,stack);
             } else return super.onItemRightClick(world,player,hand);
         } else return super.onItemRightClick(world,p,hand);
     }
