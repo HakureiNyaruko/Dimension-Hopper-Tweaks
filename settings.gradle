@@ -11,6 +11,13 @@ pluginManagement {
             }
         }
         maven {
+            name = 'Garden of Fancy'
+            url = uri 'https://maven.gofancy.wtf/releases'
+            content {
+                includeGroup 'wtf.gofancy.fancygradle'
+            }
+        }
+        maven {
             name = 'SpongePowered'
             url = uri 'https://repo.spongepowered.org/repository/maven-public/'
             content {
