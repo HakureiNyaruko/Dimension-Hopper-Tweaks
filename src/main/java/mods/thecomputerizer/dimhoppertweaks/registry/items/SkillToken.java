@@ -3,8 +3,6 @@ package mods.thecomputerizer.dimhoppertweaks.registry.items;
 import mods.thecomputerizer.dimhoppertweaks.common.capability.player.ISkillCapability;
 import mods.thecomputerizer.dimhoppertweaks.common.capability.player.SkillWrapper;
 import mods.thecomputerizer.dimhoppertweaks.core.DHTRef;
-import mods.thecomputerizer.dimhoppertweaks.network.DHTNetwork;
-import mods.thecomputerizer.dimhoppertweaks.network.PacketOpenGui;
 import mods.thecomputerizer.dimhoppertweaks.util.TextUtil;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +14,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.Tuple;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -59,7 +58,17 @@ public class SkillToken extends EpicItem {
             String skill = tag.getString("skillToDrain");
             int amount = tag.getInteger("drainLevels");
             if(player.isSneaking()) {
-                DHTNetwork.sendToClient(new PacketOpenGui(SKILLS,skill,amount),player);
+                ISkillCapability cap = SkillWrapper.getSkillCapability(player);
+                if(Objects.nonNull(cap)) {
+                    int currentIndex = SKILLS.indexOf(skill);
+                    int nextIndex = (currentIndex+1) % SKILLS.size();
+                    String nextSkill = SKILLS.get(nextIndex);
+                    cap.setDrainSelection(nextSkill,amount,player);
+                    SkillWrapper.updateTokens(player);
+                    player.sendMessage(new TextComponentTranslation(
+                            "item.dimhoppertweaks.skill_token.switched",
+                            TextUtil.getTranslated("skill."+DHTRef.MODID+"."+nextSkill)));
+                }
                 return new ActionResult<>(SUCCESS,stack);
             } else if(player.experienceLevel>=amount) {
                 ISkillCapability cap = SkillWrapper.getSkillCapability(player);

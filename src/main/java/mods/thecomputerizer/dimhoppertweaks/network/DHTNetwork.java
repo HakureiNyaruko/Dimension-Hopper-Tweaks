@@ -16,13 +16,13 @@ public class DHTNetwork {
     public static void initClient() {
         NetworkHandler.registerMsgToServer(PacketAutoInfusion.class, PacketAutoInfusion::new);
         NetworkHandler.registerMsgToServer(PacketSendKeyPressed.class,PacketSendKeyPressed::new);
-        NetworkHandler.registerMsgToServer(PacketSyncGuiData.class,PacketSyncGuiData::new);
+
     }
     
     public static void initCommon() {
         NetworkHandler.registerMsgToClient(PacketBossClientEffects.class,PacketBossClientEffects::new);
         NetworkHandler.registerMsgToClient(PacketGrayScaleTimer.class,PacketGrayScaleTimer::new);
-        NetworkHandler.registerMsgToClient(PacketOpenGui.class,PacketOpenGui::new);
+
         NetworkHandler.registerMsgToClient(PacketQueryGenericClient.class,PacketQueryGenericClient::new);
         NetworkHandler.registerMsgToClient(PacketRenderBossAttack.class,PacketRenderBossAttack::new);
         NetworkHandler.registerMsgToClient(PacketSyncCapabilityData.class,PacketSyncCapabilityData::new);

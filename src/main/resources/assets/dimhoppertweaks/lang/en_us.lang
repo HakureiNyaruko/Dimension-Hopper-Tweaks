@@ -115,9 +115,7 @@ entity.boss.dialogue_2=Now you must die.
 gas.anti_rad_solution=Stabilized Anti-Rad
 gas.raw_anti_rad_solution=Anti-Rad Solution
 
-gui.dimhoppertweaks.skill_drain=Xp Drain Selection - Scroll on the circles to change them!
-gui.dimhoppertweaks.level=The number of levels XP conversion will drain
-gui.dimhoppertweaks.current_skill=The skill that XP will drain into
+item.dimhoppertweaks.skill_token.switched=§aSkill Token drain target switched to %1$s
 
 item.dimhoppertweaks.prestige_token.name=Prestige Token Level
 item.dimhoppertweaks.reality_slasher.name=Reality Slasher
